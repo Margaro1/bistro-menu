@@ -113,8 +113,9 @@ export function ProductForm({ product }: Props) {
 
       router.push('/admin')
       router.refresh()
-    } catch {
-      setError('Error al guardar. Intenta de nuevo.')
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : JSON.stringify(err)
+      setError(`Error: ${msg}`)
       setSaving(false)
     }
   }
