@@ -8,12 +8,12 @@ export function MenuHeader() {
   const { language, setLanguage } = useLanguage()
 
   return (
-    <header className="bg-cream sticky top-0 z-10 border-b border-blue-50 px-4 py-3 flex items-center justify-between">
+    <header className="bg-cream sticky top-0 z-10 px-5 py-3 flex items-center justify-between shadow-sm">
       <Image
         src="/bistro-logo.jpeg"
         alt="Bistro"
-        width={80}
-        height={40}
+        width={90}
+        height={45}
         className="object-contain"
         priority
       />

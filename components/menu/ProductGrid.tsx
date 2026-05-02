@@ -26,14 +26,14 @@ export function ProductGrid({ categories }: Props) {
 
   return (
     <div>
-      <div className="sticky top-[60px] z-10 bg-cream py-3">
+      <div className="sticky top-[69px] z-10 bg-cream py-3">
         <CategoryTabs
           categories={tabCategories}
           activeId={activeCategoryId}
           onSelect={setActiveCategoryId}
         />
       </div>
-      <div className="grid grid-cols-2 gap-3 p-4">
+      <div className="grid grid-cols-2 gap-4 p-4 pb-10">
         {activeCategory?.products.map(product => (
           <ProductCard key={product.id} product={product} language={language} />
         ))}

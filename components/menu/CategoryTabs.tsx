@@ -21,10 +21,10 @@ export function CategoryTabs({ categories, activeId, onSelect }: Props) {
           aria-selected={cat.id === activeId}
           onClick={() => onSelect(cat.id)}
           className={`
-            flex-shrink-0 px-4 py-2 rounded-full text-sm font-medium transition-colors
+            flex-shrink-0 px-5 py-2 rounded-full text-sm font-semibold transition-all duration-200
             ${cat.id === activeId
-              ? 'bg-navy text-white'
-              : 'bg-white text-navy border border-navy/20 hover:bg-blue-50'}
+              ? 'bg-navy text-cream shadow-md'
+              : 'bg-white text-navy/60 shadow-sm hover:text-navy hover:shadow-md'}
           `}
         >
           {cat.name}

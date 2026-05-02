@@ -13,15 +13,15 @@ interface Props {
 
 export function LanguageSwitcher({ activeLanguage, onSelect }: Props) {
   return (
-    <div className="flex gap-1">
+    <div className="flex bg-white rounded-full p-0.5 shadow-sm border border-navy/10">
       {(Object.entries(LABELS) as [Language, string][]).map(([lang, label]) => (
         <button
           key={lang}
           aria-pressed={lang === activeLanguage}
           onClick={() => onSelect(lang)}
           className={`
-            px-2 py-1 text-xs font-bold rounded transition-colors
-            ${lang === activeLanguage ? 'text-navy underline underline-offset-2' : 'text-navy/50 hover:text-navy'}
+            px-3 py-1 text-xs font-bold rounded-full transition-all duration-200
+            ${lang === activeLanguage ? 'bg-navy text-cream shadow-sm' : 'text-navy/50 hover:text-navy'}
           `}
         >
           {label}
