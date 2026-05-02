@@ -1,28 +1,115 @@
-// Translation dictionaries
-const translations: Record<string, Record<string, string>> = {
-  en: {
-    hello: 'Hello',
-    'menu.items.breakfast': 'Breakfast',
-  },
+import type { Language } from './types'
+
+export const UI_STRINGS = {
   es: {
-    hello: 'Hola',
-    'menu.items.breakfast': 'Desayuno',
+    outOfStock: 'Agotado',
+    loading: 'Cargando...',
+    save: 'Guardar',
+    cancel: 'Cancelar',
+    addProduct: 'Agregar producto',
+    editProduct: 'Editar producto',
+    name: 'Nombre',
+    description: 'Descripción',
+    price: 'Precio',
+    category: 'Categoría',
+    available: 'Disponible',
+    login: 'Iniciar sesión',
+    logout: 'Cerrar sesión',
+    email: 'Correo electrónico',
+    password: 'Contraseña',
+    loginError: 'Correo o contraseña incorrectos',
+    uploadPhoto: 'Subir foto',
+    noPhoto: 'Sin foto',
+    saving: 'Guardando...',
   },
-};
+  en: {
+    outOfStock: 'Out of stock',
+    loading: 'Loading...',
+    save: 'Save',
+    cancel: 'Cancel',
+    addProduct: 'Add product',
+    editProduct: 'Edit product',
+    name: 'Name',
+    description: 'Description',
+    price: 'Price',
+    category: 'Category',
+    available: 'Available',
+    login: 'Sign in',
+    logout: 'Sign out',
+    email: 'Email',
+    password: 'Password',
+    loginError: 'Incorrect email or password',
+    uploadPhoto: 'Upload photo',
+    noPhoto: 'No photo',
+    saving: 'Saving...',
+  },
+  ko: {
+    outOfStock: '품절',
+    loading: '로딩 중...',
+    save: '저장',
+    cancel: '취소',
+    addProduct: '제품 추가',
+    editProduct: '제품 수정',
+    name: '이름',
+    description: '설명',
+    price: '가격',
+    category: '카테고리',
+    available: '이용 가능',
+    login: '로그인',
+    logout: '로그아웃',
+    email: '이메일',
+    password: '비밀번호',
+    loginError: '이메일 또는 비밀번호가 올바르지 않습니다',
+    uploadPhoto: '사진 업로드',
+    noPhoto: '사진 없음',
+    saving: '저장 중...',
+  },
+  pt: {
+    outOfStock: 'Esgotado',
+    loading: 'Carregando...',
+    save: 'Salvar',
+    cancel: 'Cancelar',
+    addProduct: 'Adicionar produto',
+    editProduct: 'Editar produto',
+    name: 'Nome',
+    description: 'Descrição',
+    price: 'Preço',
+    category: 'Categoria',
+    available: 'Disponível',
+    login: 'Entrar',
+    logout: 'Sair',
+    email: 'E-mail',
+    password: 'Senha',
+    loginError: 'E-mail ou senha incorretos',
+    uploadPhoto: 'Enviar foto',
+    noPhoto: 'Sem foto',
+    saving: 'Salvando...',
+  },
+  ja: {
+    outOfStock: '売り切れ',
+    loading: '読み込み中...',
+    save: '保存',
+    cancel: 'キャンセル',
+    addProduct: '商品を追加',
+    editProduct: '商品を編集',
+    name: '名前',
+    description: '説明',
+    price: '価格',
+    category: 'カテゴリー',
+    available: '利用可能',
+    login: 'ログイン',
+    logout: 'ログアウト',
+    email: 'メールアドレス',
+    password: 'パスワード',
+    loginError: 'メールアドレスまたはパスワードが正しくありません',
+    uploadPhoto: '写真をアップロード',
+    noPhoto: '写真なし',
+    saving: '保存中...',
+  },
+} as const
 
-/**
- * Get a translated string for a given key and language
- * @param key - The translation key
- * @param language - The language code (default: 'en')
- * @returns The translated string or the key if translation not found
- */
-export function getTranslation(key: string, language: string = 'en'): string {
-  const lang = translations[language];
+type UIKey = keyof typeof UI_STRINGS.es
 
-  if (!lang) {
-    // Fall back to English if language not found
-    return translations.en[key] ?? key;
-  }
-
-  return lang[key] ?? key;
+export function getUIString(language: Language, key: UIKey): string {
+  return UI_STRINGS[language][key]
 }

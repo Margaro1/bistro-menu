@@ -1,29 +1,18 @@
-import { getTranslation } from '../../lib/i18n';
+import { getUIString, UI_STRINGS } from '@/lib/i18n'
 
-describe('i18n', () => {
-  describe('getTranslation', () => {
-    it('should return the translated string for a given key', () => {
-      expect(getTranslation('hello')).toBe('Hello');
-    });
+describe('getUIString', () => {
+  it('retorna el string correcto en cada idioma', () => {
+    expect(getUIString('es', 'outOfStock')).toBe('Agotado')
+    expect(getUIString('en', 'outOfStock')).toBe('Out of stock')
+    expect(getUIString('ko', 'outOfStock')).toBe('품절')
+    expect(getUIString('pt', 'outOfStock')).toBe('Esgotado')
+    expect(getUIString('ja', 'outOfStock')).toBe('売り切れ')
+  })
 
-    it('should return the Spanish translation when language is set to es', () => {
-      expect(getTranslation('hello', 'es')).toBe('Hola');
-    });
-
-    it('should return the English translation when language is set to en', () => {
-      expect(getTranslation('hello', 'en')).toBe('Hello');
-    });
-
-    it('should return the key if translation is not found', () => {
-      expect(getTranslation('nonexistent_key')).toBe('nonexistent_key');
-    });
-
-    it('should handle nested keys with dots', () => {
-      expect(getTranslation('menu.items.breakfast')).toBe('Breakfast');
-    });
-
-    it('should handle nested keys in Spanish', () => {
-      expect(getTranslation('menu.items.breakfast', 'es')).toBe('Desayuno');
-    });
-  });
-});
+  it('los 5 idiomas tienen exactamente las mismas claves', () => {
+    const keys = Object.keys(UI_STRINGS.es)
+    for (const lang of ['en', 'ko', 'pt', 'ja'] as const) {
+      expect(Object.keys(UI_STRINGS[lang]).sort()).toEqual(keys.sort())
+    }
+  })
+})
