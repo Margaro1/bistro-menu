@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 import { createClient } from '@/lib/supabase/client'
+import { saveProduct } from '@/lib/actions'
 import { AvailabilityToggle } from './AvailabilityToggle'
 import type { Language, Product } from '@/lib/types'
 
@@ -68,12 +69,12 @@ export function ProductForm({ product }: Props) {
     e.preventDefault()
     setSaving(true)
     setError(null)
-    const supabase = createClient()
 
     try {
       let imageUrl = product?.image_url ?? null
 
       if (imageFile) {
+        const supabase = createClient()
         const ext = imageFile.name.split('.').pop()
         const filename = `${Date.now()}.${ext}`
         const { error: uploadError } = await supabase.storage
@@ -83,36 +84,14 @@ export function ProductForm({ product }: Props) {
         imageUrl = supabase.storage.from('product-images').getPublicUrl(filename).data.publicUrl
       }
 
-      if (isEditing) {
-        const { error: updateError } = await supabase
-          .from('products')
-          .update({ category_id: categoryId, price: parseFloat(price), available, image_url: imageUrl })
-          .eq('id', product.id)
-        if (updateError) throw updateError
-
-        for (const lang of Object.keys(translations) as Language[]) {
-          await supabase.from('product_translations')
-            .upsert(
-              { product_id: product.id, language: lang, ...translations[lang] },
-              { onConflict: 'product_id,language' }
-            )
-        }
-      } else {
-        const { data: newProduct, error: insertError } = await supabase
-          .from('products')
-          .insert({ category_id: categoryId, price: parseFloat(price), available, image_url: imageUrl })
-          .select()
-          .single()
-        if (insertError) throw insertError
-
-        for (const lang of Object.keys(translations) as Language[]) {
-          await supabase.from('product_translations')
-            .insert({ product_id: newProduct.id, language: lang, ...translations[lang] })
-        }
-      }
-
-      router.push('/admin')
-      router.refresh()
+      await saveProduct({
+        productId: product?.id,
+        categoryId,
+        price: parseFloat(price),
+        available,
+        imageUrl,
+        translations,
+      })
     } catch (err) {
       const msg = err instanceof Error ? err.message : JSON.stringify(err)
       setError(`Error: ${msg}`)
