@@ -1,6 +1,6 @@
-export type Language = 'es' | 'en' | 'ko' | 'pt' | 'ja'
+export type Language = 'es' | 'en'
 
-export const LANGUAGES: Language[] = ['es', 'en', 'ko', 'pt', 'ja']
+export const LANGUAGES: Language[] = ['es', 'en']
 
 export interface CategoryTranslation {
   language: Language

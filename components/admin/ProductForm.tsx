@@ -10,9 +10,6 @@ import type { Language, Product } from '@/lib/types'
 const LANG_LABELS: { code: Language; label: string }[] = [
   { code: 'es', label: 'Español' },
   { code: 'en', label: 'English' },
-  { code: 'ko', label: '한국어' },
-  { code: 'pt', label: 'Português' },
-  { code: 'ja', label: '日本語' },
 ]
 
 const CATEGORIES = [
@@ -28,9 +25,6 @@ function emptyTranslations(): Translations {
   return {
     es: { name: '', description: '' },
     en: { name: '', description: '' },
-    ko: { name: '', description: '' },
-    pt: { name: '', description: '' },
-    ja: { name: '', description: '' },
   }
 }
 

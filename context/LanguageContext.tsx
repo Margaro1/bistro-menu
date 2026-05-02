@@ -1,10 +1,10 @@
 'use client'
 
 import { createContext, useContext, useEffect, useState } from 'react'
-import type { Language } from '@/lib/types'
+import { LANGUAGES, type Language } from '@/lib/types'
 
 const STORAGE_KEY = 'bistro-lang'
-const VALID_LANGS: Language[] = ['es', 'en', 'ko', 'pt', 'ja']
+const VALID_LANGS = LANGUAGES
 
 interface LanguageContextValue {
   language: Language

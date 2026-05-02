@@ -3,7 +3,7 @@
 import type { Language } from '@/lib/types'
 
 const LABELS: Record<Language, string> = {
-  es: 'ES', en: 'EN', ko: 'KO', pt: 'PT', ja: 'JA',
+  es: 'ES', en: 'EN',
 }
 
 interface Props {
