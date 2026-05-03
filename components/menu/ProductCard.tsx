@@ -5,16 +5,20 @@ import { getUIString } from '@/lib/i18n'
 interface Props {
   product: Product
   language: Language
+  onClick?: () => void
 }
 
-export function ProductCard({ product, language }: Props) {
+export function ProductCard({ product, language, onClick }: Props) {
   const translation =
     product.product_translations.find(t => t.language === language) ??
     product.product_translations.find(t => t.language === 'es') ??
     { name: '', description: '' }
 
   return (
-    <div className={`rounded-2xl overflow-hidden bg-white shadow-md flex flex-col ${!product.available ? 'opacity-50' : ''}`}>
+    <button
+      onClick={onClick}
+      className={`rounded-2xl overflow-hidden bg-white shadow-md flex flex-col w-full text-left active:scale-95 transition-transform duration-150 ${!product.available ? 'opacity-50' : ''}`}
+    >
       <div className="relative aspect-[4/3] bg-cream">
         {product.image_url ? (
           <Image
@@ -49,6 +53,6 @@ export function ProductCard({ product, language }: Props) {
         )}
         <p className="font-playfair font-bold text-navy text-base mt-auto pt-1">${product.price.toFixed(2)}</p>
       </div>
-    </div>
+    </button>
   )
 }

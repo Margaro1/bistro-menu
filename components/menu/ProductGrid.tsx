@@ -3,8 +3,9 @@
 import { useState } from 'react'
 import { CategoryTabs } from './CategoryTabs'
 import { ProductCard } from './ProductCard'
+import { ProductModal } from './ProductModal'
 import { useLanguage } from '@/hooks/useLanguage'
-import type { Category } from '@/lib/types'
+import type { Category, Product } from '@/lib/types'
 
 interface Props {
   categories: Category[]
@@ -13,6 +14,7 @@ interface Props {
 export function ProductGrid({ categories }: Props) {
   const { language } = useLanguage()
   const [activeCategoryId, setActiveCategoryId] = useState(categories[0]?.id ?? 0)
+  const [selected, setSelected] = useState<Product | null>(null)
 
   const activeCategory = categories.find(c => c.id === activeCategoryId) ?? categories[0]
 
@@ -25,19 +27,33 @@ export function ProductGrid({ categories }: Props) {
   }))
 
   return (
-    <div>
-      <div className="sticky top-[69px] z-10 bg-cream py-3">
-        <CategoryTabs
-          categories={tabCategories}
-          activeId={activeCategoryId}
-          onSelect={setActiveCategoryId}
+    <>
+      <div>
+        <div className="sticky top-[69px] z-10 bg-cream py-3">
+          <CategoryTabs
+            categories={tabCategories}
+            activeId={activeCategoryId}
+            onSelect={setActiveCategoryId}
+          />
+        </div>
+        <div className="grid grid-cols-2 gap-4 p-4 pb-10">
+          {activeCategory?.products.map(product => (
+            <ProductCard
+              key={product.id}
+              product={product}
+              language={language}
+              onClick={() => setSelected(product)}
+            />
+          ))}
+        </div>
+      </div>
+      {selected && (
+        <ProductModal
+          product={selected}
+          language={language}
+          onClose={() => setSelected(null)}
         />
-      </div>
-      <div className="grid grid-cols-2 gap-4 p-4 pb-10">
-        {activeCategory?.products.map(product => (
-          <ProductCard key={product.id} product={product} language={language} />
-        ))}
-      </div>
-    </div>
+      )}
+    </>
   )
 }
