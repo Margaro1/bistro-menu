@@ -17,7 +17,7 @@ export function ProductCard({ product, language, onClick }: Props) {
   return (
     <button
       onClick={onClick}
-      className={`rounded-2xl overflow-hidden bg-white shadow-md flex flex-col w-full text-left active:scale-95 transition-transform duration-150 ${!product.available ? 'opacity-50' : ''}`}
+      className={`cursor-pointer rounded-2xl overflow-hidden bg-white shadow-sm flex flex-col w-full text-left active:scale-95 transition-all duration-200 hover:shadow-md ${!product.available ? 'opacity-50' : ''}`}
     >
       <div className="relative aspect-[4/3] bg-cream">
         {product.image_url ? (
@@ -49,9 +49,9 @@ export function ProductCard({ product, language, onClick }: Props) {
       <div className="p-3 flex flex-col flex-1 gap-1">
         <p className="font-playfair font-bold text-navy text-sm leading-snug">{translation.name}</p>
         {translation.description && (
-          <p className="text-navy/50 text-xs leading-snug line-clamp-2">{translation.description}</p>
+          <p className="text-navy/60 text-xs leading-snug line-clamp-2">{translation.description}</p>
         )}
-        <p className="font-playfair font-bold text-navy text-base mt-auto pt-1">${product.price.toFixed(2)}</p>
+        <p className="font-playfair font-bold text-gold text-base mt-auto pt-1">${product.price.toFixed(2)}</p>
       </div>
     </button>
   )

@@ -46,7 +46,7 @@ export function ProductModal({ product, language, onClose }: Props) {
           )}
           <button
             onClick={onClose}
-            className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm rounded-full w-9 h-9 flex items-center justify-center shadow-md"
+            className="cursor-pointer absolute top-3 right-3 bg-white/90 backdrop-blur-sm rounded-full w-9 h-9 flex items-center justify-center shadow-md hover:bg-white transition-colors duration-200"
             aria-label="Cerrar"
           >
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
@@ -67,12 +67,12 @@ export function ProductModal({ product, language, onClose }: Props) {
             <h2 className="font-playfair font-bold text-navy text-2xl leading-tight flex-1">
               {translation.name}
             </h2>
-            <p className="font-playfair font-bold text-navy text-2xl flex-shrink-0">
+            <p className="font-playfair font-bold text-gold text-2xl flex-shrink-0">
               ${product.price.toFixed(2)}
             </p>
           </div>
           {translation.description && (
-            <p className="text-navy/60 text-sm mt-3 leading-relaxed">
+            <p className="text-navy/70 text-sm mt-3 leading-relaxed">
               {translation.description}
             </p>
           )}

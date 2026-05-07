@@ -20,7 +20,7 @@ export function LanguageSwitcher({ activeLanguage, onSelect }: Props) {
           aria-pressed={lang === activeLanguage}
           onClick={() => onSelect(lang)}
           className={`
-            px-3 py-1 text-xs font-bold rounded-full transition-all duration-200
+            cursor-pointer px-3 py-1 text-xs font-bold rounded-full transition-all duration-200
             ${lang === activeLanguage ? 'bg-navy text-cream shadow-sm' : 'text-navy/50 hover:text-navy'}
           `}
         >
